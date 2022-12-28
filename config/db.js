@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 mongoose
-    .connect("mongodb+srv://" + process.env.DB_USER_PASS + "@cluster0.2gjbq.mongodb.net/test",
+    .connect(process.env.STRING_URI,
         {
             useNewUrlParser: true,
             useUnifiedTopology: true,
