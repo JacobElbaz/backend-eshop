@@ -50,7 +50,7 @@ module.exports.allProduct = async (req, res) => {
 module.exports.getLatestProduct = async (req, res) => {
   const products = await ProductModel.find({})
   .sort({releaseDate: -1})
-  .limit(4)
+  .limit(6)
   if (!products) {
     res.status(404);
     throw new Error('Latest products not found');
@@ -61,7 +61,7 @@ module.exports.getLatestProduct = async (req, res) => {
 module.exports.getBestSeller = async (req, res) => {
   const products = await ProductModel.find({})
   .sort({sales: -1})
-  .limit(4)
+  .limit(6)
   if (!products) {
     res.status(404);
     throw new Error('Best-seller products not found');
@@ -85,7 +85,7 @@ module.exports.getBestSellerManager = async (req, res) => {
 module.exports.getTrend = async (req, res) => {
   const products = await ProductModel.find({})
   .sort({sales: -1})
-  .limit(4)
+  .limit(6)
   if (!products) {
     res.status(404);
     throw new Error('Trending products not found');
@@ -96,7 +96,7 @@ module.exports.getTrend = async (req, res) => {
 module.exports.getDeals = async (req, res) => {
   const products = await ProductModel.find({price: {$lte: 10}})
   .sort({price: 0})
-  .limit(4)
+  .limit(6)
   if (!products) {
     res.status(404);
     throw new Error('Big Deals products not found');
