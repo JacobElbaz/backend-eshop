@@ -36,6 +36,7 @@ module.exports.checkClient = (req, res, next) => {
       });
     } else {
       console.log('No token');
+      res.sendStatus(404);
     }
   };
   

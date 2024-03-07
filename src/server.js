@@ -12,12 +12,19 @@ const productRoutes = require('./routes/product.routes');
 const orderRoutes = require('./routes/order.routes');
 const datesRoutes = require('./routes/dates.routes');
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://game-zone-eshop.netlify.app/', // Replace with the actual origin of your client
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // Allow credentials in CORS
+  optionsSuccessStatus: 204, // Pre-flight request successful status
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use((req, res, next) => {
-    if (req.method === "OPTIONS") {
+      const origin = req.get('Origin');
+      res.set('Access-Control-Allow-Origin', origin);
+      if (req.method === "OPTIONS") {
       res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
       return res.status(200).json({});
     }
@@ -27,7 +34,6 @@ app.use((req, res, next) => {
 //jwt
 app.get('*', checkClient);
 app.get('/jwtid', requireAuth, (req, res) =>{
-    res.set('Access-Control-Allow-Origin', 'http://localhost:3000')
     res.set('Access-Control-Allow-Credentials', 'true')
     res.status(200).send(res.locals.client._id)
 });

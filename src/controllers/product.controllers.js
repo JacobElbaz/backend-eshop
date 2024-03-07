@@ -190,3 +190,19 @@ module.exports.updateRateProduct = async (req, res) => {
   product.rating.push(rate_);
   await product.save();
 }
+
+const rawg_key = '3637452c916246549a30127556d26636'
+const gb_key = '177ecf634b55422c9ec73d367811701f7a033648'
+
+module.exports.getRandomGame = async (req, res) => {
+  const platform = req.params.id;
+  const response = await fetch(`https://api.rawg.io/api/games?key=3637452c916246549a30127556d26636&dates=2020-09-01,2021-09-30&platforms=${platform}&page=2`);
+  const data = await response.json();
+  const games = data.results;
+  const randomIndex = Math.floor(Math.random() * (20));
+  console.log(data.count);
+  console.log(randomIndex);
+  const randomGame = games[randomIndex];
+  console.log(randomGame);
+  return res.send(randomGame);
+}

@@ -28,16 +28,21 @@ module.exports.signIn = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const client = await ClientModel.login( email, password );
+    const client = await ClientModel.login(email, password);
 
     const token = createToken(client._id);
-    res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge});
-    res.status(200).json({ client: client._id})
+    console.log(client);
+    console.log(token);
+
+    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge });
+    res.status(200).json({ client: client._id });
   } catch (err) {
     const errors = signInErrors(err);
     res.status(200).json({ errors });
   }
 };
+
+
 
 module.exports.logout = (req, res) => {
   res.cookie('jwt', '', { maxAge: 1});
