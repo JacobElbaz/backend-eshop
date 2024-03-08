@@ -22,7 +22,7 @@ const clientSchema = mongoose.Schema(
       type: Boolean,
     },
     wishlist: {
-      type: [{type: mongoose.Schema.Types.ObjectId, ref: 'product'}]
+      type: []
     }
   },
   {
