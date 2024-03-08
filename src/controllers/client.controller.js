@@ -54,7 +54,7 @@ module.exports.addWishlist = async (req, res) => {
   if (client) {
       const product = await Product.findById(productId);
       const productObj = product.toObject();
-      client.wishlist.push(productObj);
+      client.wishlist.push({...productObj});
     await client.save();
     
 
