@@ -13,7 +13,7 @@ const orderRoutes = require('./routes/order.routes');
 const datesRoutes = require('./routes/dates.routes');
 
 app.use(cors({
-  origin: 'https://game-zone-eshop.netlify.app', // Replace with the actual origin of your client
+  origin: ['https://game-zone-eshop.netlify.app', 'http://localhost:3000'], // Replace with the actual origin of your client
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, // Allow credentials in CORS
   optionsSuccessStatus: 204, // Pre-flight request successful status
